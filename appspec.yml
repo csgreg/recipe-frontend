@@ -1,7 +1,7 @@
 version: 0.0
 os: linux
 files:
-  - sources: /
+  - source: /
     destination: /home/ec2-user/recipe-frontend
 hooks:
   ApplicationStop:
@@ -16,4 +16,3 @@ hooks:
     - location: scripts/application_start.sh
       timeout: 300
       runas: ec2-user
-
