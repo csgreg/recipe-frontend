@@ -10,12 +10,8 @@
 		"sourceMap": true,
 		"strict": true,
 		"paths": {
-			"components/*": [
-				"src/components/*"
-			],
-			"src/*": [
-				"src/*"
-			]
+			"components/*": ["src/components/*"],
+			"src/*": ["src/*"]
 		}
 	}
 }

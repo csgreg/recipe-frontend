@@ -9,7 +9,7 @@ const config: UserConfig = {
 			src: resolve('./src')
 		}
 	},
-	plugins: [sveltekit()]	
+	plugins: [sveltekit()]
 };
 
 export default config;
