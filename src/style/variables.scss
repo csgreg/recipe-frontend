@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 $spacing-01: 2px;
 $spacing-02: 4px;
 $spacing-03: 8px;
@@ -8,12 +12,13 @@ $spacing-07: 32px;
 $spacing-08: 40px;
 
 $bg-primary: #eeeeee;
-$bg-seconday: #dadada;
+$bg-secondary: #dadada;
 
 $text-primary: #272634;
-$text-seconday: #37394b;
+$text-secondary: #37394b;
+
+$text-placeholder:#969699;
 
 $color-primary: #8a2eff;
-$color-primary: #9cc2fa;
+$color-secondary: #9cc2fa;
 
-$gradient-primary: linear-gradient(45deg, var($color-primary), var($color-primary));
