@@ -37,6 +37,7 @@
 
 	.label {
 		margin-bottom: 0;
+		padding-bottom: $spacing-01;
 	}
 
 	.input {
