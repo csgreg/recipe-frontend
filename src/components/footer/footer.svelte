@@ -63,6 +63,6 @@
 	@import '../../style/variables.scss';
 	.footer {
 		background-color: $color-secondary;
-        color: $text-secondary;
+		color: $text-secondary;
 	}
 </style>

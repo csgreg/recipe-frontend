@@ -7,7 +7,9 @@
 
 <div class="create-page">
 	<h1 class="title">Create Recipe</h1>
-	<span class="subtitle">Just fill the form to create your outline-width recipe and share with others!</span>
+	<span class="subtitle"
+		>Just fill the form to create your outline-width recipe and share with others!</span
+	>
 	<div class="card">
 		<form>
 			<div class="container name-input-container">
