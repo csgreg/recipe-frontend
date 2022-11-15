@@ -4,7 +4,7 @@
 	export let placeholder: string;
 	export let type: string = 'text';
 	export let className: string = '';
-	export let inputValue: string = '';
+	export let inputValue: string | number = '';
 	export let withButton: boolean = false;
 
 	const handleInput = (e: any) => {
