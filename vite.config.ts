@@ -6,6 +6,7 @@ const config: UserConfig = {
 	resolve: {
 		alias: {
 			components: resolve('./src/components'),
+			entities: resolve('./src/entities'),
 			src: resolve('./src')
 		}
 	},
