@@ -1,1 +1,1 @@
-export const api_routes = {create_recipe: '/api/recipes/create'}
+export const api_routes = { create_recipe: '/api/recipes/create' };
