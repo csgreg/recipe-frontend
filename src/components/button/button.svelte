@@ -40,24 +40,24 @@
 	}
 
 	.btn-featured {
-		background: linear-gradient(45deg, $color-primary, $color-secondary);
-		border: $color-secondary;
+		background: linear-gradient(45deg, $color-01, $color-02);
+		border: $color-02;
 	}
 
 	.btn-primary {
-		background-color: $color-primary;
-		border: $color-secondary;
+		background-color: $color-01;
+		border: $color-02;
 	}
 
 	.btn-primary:hover {
-		background-color: $color-primary;
+		background-color: $color-01;
 	}
 
 	.btn-text {
 		padding: 2px 4px;
 		border: 0px;
 		background-color: transparent;
-		color: $color-secondary;
+		color: $color-02;
 	}
 
 	.btn-text:hover {

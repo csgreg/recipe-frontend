@@ -7,9 +7,7 @@
 
 <div class="create-page">
 	<h1 class="title">Create Recipe</h1>
-	<span class="subtitle"
-		>Just fill the form to create your outline-width recipe and share with others!</span
-	>
+	<span class="subtitle">Just fill the form to create your recipe and share with others!</span>
 	<div class="card">
 		<form>
 			<div class="container name-input-container">
@@ -19,7 +17,7 @@
 				<Input placeholder="Recipe ingredients" label="Ingredients" />
 			</div>
 			<div class="container time-input-container">
-				<Input placeholder="5 mins" label="Recipe time needed" />
+				<Input type="number" placeholder="5 mins" label="Recipe time needed" />
 			</div>
 			<div class="container description-input-container">
 				<Textarea resizeable placeholder="Description" label="Description" />

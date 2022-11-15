@@ -62,7 +62,7 @@
 <style lang="scss">
 	@import '../../style/variables.scss';
 	.footer {
-		background-color: $color-secondary;
+		background-color: $bg-primary;
 		color: $text-secondary;
 	}
 </style>
