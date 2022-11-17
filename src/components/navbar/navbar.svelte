@@ -10,16 +10,16 @@
 			<Logo isSmall />
 		</div>
 		<li class="navbar-item" itemprop="name">
-			<a itemprop="url" href="http://www.travelstore.com/our-advantage">Home</a>
+			<a itemprop="url" href="#">Home</a>
 		</li>
 		<li class="navbar-item" itemprop="name">
-			<a itemprop="url" href="http://www.travelstore.com/our-travel-experts">Create</a>
+			<a itemprop="url" href="#">Create</a>
 		</li>
 		<li class="navbar-item" itemprop="name">
-			<a itemprop="url" href="http://www.travelstore.com/destinations">About</a>
+			<a itemprop="url" href="#">About</a>
 		</li>
 		<li class="navbar-item" itemprop="name">
-			<a itemprop="url" href="http://www.travelstore.com/cruises">Contact</a>
+			<a itemprop="url" href="#">Contact</a>
 		</li>
 		<span class="navbar-end sign-up-btn">
 			<Button size={ButtonSize.Field} onClick={() => {}} kind={ButtonKind.Text}>Sign up</Button>
