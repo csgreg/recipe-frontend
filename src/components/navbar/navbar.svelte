@@ -1,7 +1,14 @@
 <script>
 	import Button from 'components/button/button.svelte';
 	import { ButtonKind, ButtonSize } from 'components/button/types';
+	import Cancel24 from 'components/icons/Cancel24.svelte';
 	import Logo from 'components/icons/Logo.svelte';
+	import Menu24 from 'components/icons/Menu24.svelte';
+
+	let isDown = true;
+	const handleDown = () => {
+		isDown = !isDown;
+	};
 </script>
 
 <div class="navbar-container">
@@ -9,20 +16,23 @@
 		<div class="navbar-brand">
 			<Logo isSmall />
 		</div>
-		<li class="navbar-item" itemprop="name">
-			<a itemprop="url" href="#">Home</a>
+		<li class="navbar-item" class:is-hidden={isDown} itemprop="name">
+			<a itemprop="url" href="/">Home</a>
 		</li>
-		<li class="navbar-item" itemprop="name">
-			<a itemprop="url" href="#">Create</a>
+		<li class="navbar-item" class:is-hidden={isDown} itemprop="name">
+			<a itemprop="url" href="/create-recipe">Create</a>
 		</li>
-		<li class="navbar-item" itemprop="name">
-			<a itemprop="url" href="#">About</a>
+		<li class="navbar-item" class:is-hidden={isDown} itemprop="name">
+			<a itemprop="url" href="http://www.travelstore.com/destinations">About</a>
 		</li>
-		<li class="navbar-item" itemprop="name">
-			<a itemprop="url" href="#">Contact</a>
+		<li class="navbar-item" class:is-hidden={isDown} itemprop="name">
+			<a itemprop="url" href="http://www.travelstore.com/cruises">Contact</a>
 		</li>
-		<span class="navbar-end sign-up-btn">
+		<span class="sign-up-btn">
 			<Button size={ButtonSize.Field} onClick={() => {}} kind={ButtonKind.Text}>Sign up</Button>
+		</span>
+		<span class="drop-down-btn" on:click={handleDown}>
+			{#if isDown} <Menu24 /> {:else} <Cancel24 /> {/if}
 		</span>
 	</ul>
 </div>
@@ -53,6 +63,10 @@
 				}
 			}
 
+			.is-hidden {
+				display: none;
+			}
+
 			&-item:hover {
 				background-color: $color-01;
 				color: $bg-primary;
@@ -71,6 +85,17 @@
 				top: 4px;
 				right: 40px;
 			}
+			.drop-down-btn {
+				position: absolute;
+				left: 12px;
+				top: 8px;
+				padding: $spacing-03;
+				border-radius: 4px;
+				cursor: pointer;
+			}
+			.drop-down-btn:hover {
+				background-color: $color-01;
+			}
 		}
 
 		@media screen and (min-width: $screen-md) {
@@ -85,6 +110,9 @@
 					padding: $spacing-02 $spacing-04;
 					font-weight: 500;
 				}
+				.is-hidden {
+					display: unset;
+				}
 
 				&-brand {
 					margin-right: $spacing-08;
@@ -93,6 +121,9 @@
 
 				.sign-up-btn {
 					top: 10px;
+				}
+				.drop-down-btn {
+					display: none;
 				}
 			}
 		}
