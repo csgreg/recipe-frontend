@@ -57,7 +57,7 @@
 		padding: 2px 4px;
 		border: 0px;
 		background-color: transparent;
-		color: $color-02;
+		color: $color-01;
 	}
 
 	.btn-text:hover {

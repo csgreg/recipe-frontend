@@ -2,6 +2,7 @@
 	import Textarea from 'components/textarea/textarea.svelte';
 	import Input from 'components/input/input.svelte';
 	import Button from 'components/button/button.svelte';
+	import Alert from 'components/alert/alert.svelte';
 	import { ButtonKind } from 'components/button/types';
 	import { api_routes } from 'src/routes';
 
@@ -33,9 +34,9 @@
 			.then((response) => response.json())
 			.then((data) => {
 				if (data.id) {
-					message = 'Recipe created successfully';
+					message = 'Recipe created successfully!';
 				} else {
-					message = 'Something went wrong..';
+					message = 'Something went wrong...';
 					isError = true;
 				}
 				loading = false;
@@ -55,12 +56,8 @@
 				<Input placeholder="Recipe ingredients" label="Ingredients" />
 			</div>
 			<div class="container time-input-container">
-				<Input
-					type="number"
-					placeholder="5 mins"
-					label="Recipe time needed"
-					bind:inputValue={time}
-				/>
+				<Input type="number" placeholder="5" label="Recipe time needed" bind:inputValue={time} />
+				<span>minutes</span>
 			</div>
 			<div class="container description-input-container">
 				<Textarea
@@ -71,7 +68,7 @@
 				/>
 			</div>
 			<div class="button-container">
-				<Button kind={ButtonKind.Featured} onClick={handleSubmit}>Submit</Button>
+				<Button {loading} kind={ButtonKind.Featured} onClick={handleSubmit}>Submit</Button>
 			</div>
 			{#if message}
 				<div class="alert {isError ? 'alert-error' : 'alert-success'} shadow-lg message">
@@ -93,6 +90,9 @@
 				</div>
 			{/if}
 		</form>
+	</div>
+	<div class="alert-container">
+		<Alert {isError} {message} />
 	</div>
 </div>
 
@@ -142,6 +142,23 @@
 			.message {
 				margin-top: $spacing-04;
 			}
+
+			.time-input-container {
+				display: flex;
+
+				span {
+					display: flex;
+					align-items: center;
+					margin-top: $spacing-06;
+					margin-left: $spacing-04;
+				}
+			}
+		}
+
+		.alert-container {
+			max-width: 400px;
+			margin: auto;
+			margin-bottom: $spacing-08;
 		}
 	}
 </style>
