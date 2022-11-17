@@ -9,13 +9,13 @@
 		<Card>
 			<div class="sign-up-container">
 				<h2 class="subtitle">Sign Up</h2>
-				<div>
+				<div class="input-container">
 					<Input placeholder="email" label="Email" />
 				</div>
-				<div>
+				<div class="input-container">
 					<Input placeholder="password" label="Password" />
 				</div>
-				<div>
+				<div class="input-container">
 					<Input placeholder="confirm password" label="Confirm Password" />
 				</div>
 				<div class="cta-btn">
@@ -28,13 +28,13 @@
 		<Card>
 			<div class="login-container">
 				<h2 class="subtitle">Login</h2>
-				<div>
+				<div class="input-container">
 					<Input placeholder="email" label="Email" />
 				</div>
-				<div>
+				<div class="input-container">
 					<Input placeholder="password" label="Password" />
 				</div>
-				<div>
+				<div class="forgot-password">
 					<a href="#">Forgot my password</a>
 				</div>
 				<div class="cta-btn">
@@ -51,42 +51,57 @@
 		display: flex;
 		flex-direction: column;
 		margin-top: $spacing-07;
+
 		.subtitle {
 			font-size: 20px;
 			font-weight: 500;
+			margin-bottom: $spacing-03;
 		}
+
+		.input-container {
+			margin-bottom: $spacing-02;
+		}
+
+		.cta-btn {
+			display: flex;
+			height: 100%;
+			justify-content: center;
+			align-items: flex-end;
+		}
+
 		.login-container {
 			height: 350px;
 			text-align: center;
 			display: flex;
 			flex-direction: column;
-			.cta-btn {
-				display: flex;
-				height: 100%;
-				justify-content: center;
-				align-items: flex-end;
+
+			.forgot-password {
+				margin-top: $spacing-03;
+				text-align: start;
+				color: $color-02;
+			}
+
+			.forgot-password:hover {
+				text-decoration: underline;
 			}
 		}
+
 		.sign-up-container {
 			height: 350px;
 			text-align: center;
 			display: flex;
 			flex-direction: column;
-			.cta-btn {
-				display: flex;
-				height: 100%;
-				justify-content: center;
-				align-items: flex-end;
-			}
 		}
 
 		@media screen and (min-width: $screen-md) {
 			flex-direction: row;
 			justify-content: center;
+
 			.left {
 				margin: $spacing-01 $spacing-05;
 				min-height: 400px;
 			}
+
 			.right {
 				margin: $spacing-01 $spacing-05;
 				min-height: 400px;

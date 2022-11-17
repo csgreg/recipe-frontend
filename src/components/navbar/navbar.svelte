@@ -28,9 +28,10 @@
 		<li class="navbar-item" class:is-hidden={isDown} itemprop="name">
 			<a itemprop="url" href="http://www.travelstore.com/cruises">Contact</a>
 		</li>
-		<span class="sign-up-btn">
+		<div class="sign-up-btn">
 			<Button size={ButtonSize.Field} onClick={() => {}} kind={ButtonKind.Text}>Sign up</Button>
-		</span>
+		</div>
+
 		<span class="drop-down-btn" on:click={handleDown}>
 			{#if isDown} <Menu24 /> {:else} <Cancel24 /> {/if}
 		</span>
@@ -41,11 +42,13 @@
 	@import '../../style/variables.scss';
 
 	.navbar-container {
+		color: $text-primary;
 		width: 100%;
 		display: flex;
 		background-color: $bg-primary;
 
 		.navbar {
+			padding: 0;
 			display: flex;
 			flex-direction: column;
 			height: 100%;
@@ -57,10 +60,14 @@
 				font-weight: 500;
 
 				a {
-					width: 100%;
 					padding: $spacing-03;
+					width: 100%;
 					text-align: center;
 				}
+			}
+
+			&-item:last-of-type {
+				margin-bottom: $spacing-05;
 			}
 
 			.is-hidden {
@@ -68,13 +75,14 @@
 			}
 
 			&-item:hover {
-				background-color: $color-01;
+				background-color: $color-02;
 				color: $bg-primary;
 				border-radius: 8px;
 				font-weight: 500;
 			}
 
 			&-brand {
+				min-height: 70px;
 				display: flex;
 				align-items: center;
 				justify-content: center;
@@ -82,19 +90,19 @@
 
 			.sign-up-btn {
 				position: absolute;
-				top: 4px;
+				top: 10px;
 				right: 40px;
 			}
 			.drop-down-btn {
 				position: absolute;
 				left: 12px;
-				top: 8px;
-				padding: $spacing-03;
+				top: 10px;
+				padding: $spacing-04;
 				border-radius: 4px;
 				cursor: pointer;
 			}
 			.drop-down-btn:hover {
-				background-color: $color-01;
+				background-color: $color-02;
 			}
 		}
 
@@ -107,9 +115,14 @@
 				&-item {
 					width: unset;
 					margin-right: $spacing-07;
-					padding: $spacing-02 $spacing-04;
+					padding: $spacing-03;
 					font-weight: 500;
 				}
+
+				&-item:last-of-type {
+					margin-bottom: unset;
+				}
+
 				.is-hidden {
 					display: unset;
 				}
@@ -120,7 +133,11 @@
 				}
 
 				.sign-up-btn {
-					top: 10px;
+					position: unset;
+					display: flex;
+					justify-content: flex-end;
+					width: 100%;
+					height: 100%;
 				}
 				.drop-down-btn {
 					display: none;
