@@ -17,19 +17,27 @@
 			<Logo isSmall />
 		</div>
 		<li class="navbar-item" class:is-hidden={isDown} itemprop="name">
-			<a itemprop="url" href="/">Home</a>
+			<a data-sveltekit-reload itemprop="url" href="/">Home</a>
 		</li>
 		<li class="navbar-item" class:is-hidden={isDown} itemprop="name">
-			<a itemprop="url" href="/create-recipe">Create</a>
+			<a data-sveltekit-reload itemprop="url" href="/create-recipe">Create</a>
 		</li>
 		<li class="navbar-item" class:is-hidden={isDown} itemprop="name">
-			<a itemprop="url" href="http://www.travelstore.com/destinations">About</a>
+			<a data-sveltekit-reload itemprop="url" href="http://www.travelstore.com/destinations"
+				>About</a
+			>
 		</li>
 		<li class="navbar-item" class:is-hidden={isDown} itemprop="name">
-			<a itemprop="url" href="http://www.travelstore.com/cruises">Contact</a>
+			<a data-sveltekit-reload itemprop="url" href="http://www.travelstore.com/cruises">Contact</a>
 		</li>
 		<div class="sign-up-btn">
-			<Button size={ButtonSize.Field} onClick={() => {}} kind={ButtonKind.Text}>Sign up</Button>
+			<Button
+				size={ButtonSize.Field}
+				onClick={() => {
+					window.location.href = '/auth';
+				}}
+				kind={ButtonKind.Text}>Sign up</Button
+			>
 		</div>
 
 		<span class="drop-down-btn" on:click={handleDown}>
