@@ -44,23 +44,39 @@
 	};
 </script>
 
+<svelte:head>
+	<title>Create recipe</title>
+</svelte:head>
+
 <div class="create-page">
 	<h1 class="title">Create Recipe</h1>
 	<span class="subtitle">Just fill the form to create your recipe and share with others!</span>
 	<div class="card">
-		<form>
+		<form on:submit={handleSubmit}>
 			<div class="container name-input-container">
-				<Input placeholder="Recipe name" label="Recipe name" bind:inputValue={name} />
+				<Input
+					domId="recipe-name"
+					placeholder="Recipe name"
+					label="Recipe name"
+					bind:inputValue={name}
+				/>
 			</div>
 			<div class="container recipe-input-container">
-				<Input placeholder="Recipe ingredients" label="Ingredients" />
+				<Input domId="recipe-ingredints" placeholder="Recipe ingredients" label="Ingredients" />
 			</div>
 			<div class="container time-input-container">
-				<Input type="number" placeholder="5" label="Recipe time needed" bind:inputValue={time} />
+				<Input
+					type="number"
+					domId="recipe-time"
+					placeholder="5"
+					label="Recipe time needed"
+					bind:inputValue={time}
+				/>
 				<span>minutes</span>
 			</div>
 			<div class="container description-input-container">
 				<Textarea
+					domId="recipe-description"
 					resizeable
 					placeholder="Description"
 					label="Description"
@@ -68,7 +84,7 @@
 				/>
 			</div>
 			<div class="button-container">
-				<Button {loading} kind={ButtonKind.Featured} onClick={handleSubmit}>Submit</Button>
+				<Button {loading} kind={ButtonKind.Featured}>Submit</Button>
 			</div>
 		</form>
 	</div>

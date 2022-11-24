@@ -2,7 +2,7 @@
 	import { ButtonKind, ButtonSize } from './types';
 	import classNames from 'classnames';
 
-	export let onClick: any;
+	export let onClick: any = () => {};
 	export let kind: ButtonKind = ButtonKind.Primary;
 	export let size: ButtonSize = ButtonSize.Field;
 	export let loading: boolean = false;
