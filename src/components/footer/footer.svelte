@@ -1,11 +1,11 @@
 <script>
-	import Logo from 'components/icons/Logo.svelte';
+	import projectLogo from '$lib/static/logo.svg';
 </script>
 
 <footer class="footer footer-center p-10 bg-primary text-primary-content">
 	<div>
 		<div class="logo-container">
-			<Logo />
+			<img src={projectLogo} alt="project logo" />
 		</div>
 		<p class="font-bold">
 			ACME Industries Ltd. <br />Providing reliable tech since 1992
@@ -14,7 +14,7 @@
 	</div>
 	<div>
 		<div class="grid grid-flow-col gap-4">
-			<a
+			<a href="#"
 				><svg
 					xmlns="http://www.w3.org/2000/svg"
 					width="24"
@@ -26,7 +26,7 @@
 					/></svg
 				></a
 			>
-			<a
+			<a href="#"
 				><svg
 					xmlns="http://www.w3.org/2000/svg"
 					width="24"
@@ -38,7 +38,7 @@
 					/></svg
 				></a
 			>
-			<a
+			<a href="#"
 				><svg
 					xmlns="http://www.w3.org/2000/svg"
 					width="24"
