@@ -2,7 +2,7 @@
 	import Button from 'components/button/button.svelte';
 	import { ButtonKind, ButtonSize } from 'components/button/types';
 	import Cancel24 from 'components/icons/Cancel24.svelte';
-	import Logo from 'components/icons/Logo.svelte';
+	import brandLogo from '$lib/static/logo.svg';
 	import Menu24 from 'components/icons/Menu24.svelte';
 
 	let isDown = true;
@@ -13,28 +13,35 @@
 
 <div class="navbar-container">
 	<ul class="navbar" itemscope itemtype="http://www.schema.org/SiteNavigationElement">
-		<div class="navbar-brand">
-			<Logo isSmall />
-		</div>
-		<li class="navbar-item" class:is-hidden={isDown} itemprop="name">
-			<a itemprop="url" href="/">Home</a>
+		<li class="navbar-brand">
+			<img class="navbar-brand-logo" src={brandLogo} alt="project logo" />
 		</li>
-		<li class="navbar-item" class:is-hidden={isDown} itemprop="name">
-			<a itemprop="url" href="/create-recipe">Create</a>
+		<li class="sign-up-btn">
+			<Button
+				size={ButtonSize.Field}
+				onClick={() => {
+					window.location.href = '/auth';
+				}}
+				kind={ButtonKind.Text}>Sign up</Button
+			>
 		</li>
-		<li class="navbar-item" class:is-hidden={isDown} itemprop="name">
-			<a itemprop="url" href="http://www.travelstore.com/destinations">About</a>
-		</li>
-		<li class="navbar-item" class:is-hidden={isDown} itemprop="name">
-			<a itemprop="url" href="http://www.travelstore.com/cruises">Contact</a>
-		</li>
-		<div class="sign-up-btn">
-			<Button size={ButtonSize.Field} onClick={() => {}} kind={ButtonKind.Text}>Sign up</Button>
-		</div>
-
-		<span class="drop-down-btn" on:click={handleDown}>
+		<li class="drop-down-btn" on:mousedown={handleDown}>
 			{#if isDown} <Menu24 /> {:else} <Cancel24 /> {/if}
-		</span>
+		</li>
+		<li class="navbar-item" class:is-hidden={isDown} itemprop="name">
+			<a data-sveltekit-reload itemprop="url" href="/">Home</a>
+		</li>
+		<li class="navbar-item" class:is-hidden={isDown} itemprop="name">
+			<a data-sveltekit-reload itemprop="url" href="/create-recipe">Create</a>
+		</li>
+		<li class="navbar-item" class:is-hidden={isDown} itemprop="name">
+			<a data-sveltekit-reload itemprop="url" href="http://www.travelstore.com/destinations"
+				>About</a
+			>
+		</li>
+		<li class="navbar-item" class:is-hidden={isDown} itemprop="name">
+			<a data-sveltekit-reload itemprop="url" href="http://www.travelstore.com/cruises">Contact</a>
+		</li>
 	</ul>
 </div>
 
@@ -46,6 +53,7 @@
 		width: 100%;
 		display: flex;
 		background-color: $bg-primary;
+		box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
 
 		.navbar {
 			padding: 0;
@@ -82,21 +90,25 @@
 			}
 
 			&-brand {
-				min-height: 70px;
 				display: flex;
 				align-items: center;
 				justify-content: center;
+				height: 64px;
+
+				&-logo {
+					max-height: 40px;
+				}
 			}
 
 			.sign-up-btn {
 				position: absolute;
-				top: 10px;
+				top: 8px;
 				right: 40px;
 			}
 			.drop-down-btn {
 				position: absolute;
 				left: 12px;
-				top: 10px;
+				top: 8px;
 				padding: $spacing-04;
 				border-radius: 4px;
 				cursor: pointer;
@@ -107,7 +119,7 @@
 		}
 
 		@media screen and (min-width: $screen-md) {
-			height: 70px;
+			height: 64px;
 
 			.navbar {
 				flex-direction: row;
@@ -128,8 +140,12 @@
 				}
 
 				&-brand {
+					min-width: 70px;
+					min-height: 70px;
 					margin-right: $spacing-08;
-					margin-left: $spacing-06;
+					&-logo {
+						height: 40px;
+					}
 				}
 
 				.sign-up-btn {
@@ -138,6 +154,7 @@
 					justify-content: flex-end;
 					width: 100%;
 					height: 100%;
+					order: 3;
 				}
 				.drop-down-btn {
 					display: none;

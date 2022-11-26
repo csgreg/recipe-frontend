@@ -44,23 +44,39 @@
 	};
 </script>
 
+<svelte:head>
+	<title>Create recipe</title>
+</svelte:head>
+
 <div class="create-page">
 	<h1 class="title">Create Recipe</h1>
 	<span class="subtitle">Just fill the form to create your recipe and share with others!</span>
 	<div class="card">
-		<form>
+		<form on:submit={handleSubmit}>
 			<div class="container name-input-container">
-				<Input placeholder="Recipe name" label="Recipe name" bind:inputValue={name} />
+				<Input
+					domId="recipe-name"
+					placeholder="Recipe name"
+					label="Recipe name"
+					bind:inputValue={name}
+				/>
 			</div>
 			<div class="container recipe-input-container">
-				<Input placeholder="Recipe ingredients" label="Ingredients" />
+				<Input domId="recipe-ingredints" placeholder="Recipe ingredients" label="Ingredients" />
 			</div>
 			<div class="container time-input-container">
-				<Input type="number" placeholder="5" label="Recipe time needed" bind:inputValue={time} />
+				<Input
+					type="number"
+					domId="recipe-time"
+					placeholder="5"
+					label="Recipe time needed"
+					bind:inputValue={time}
+				/>
 				<span>minutes</span>
 			</div>
 			<div class="container description-input-container">
 				<Textarea
+					domId="recipe-description"
 					resizeable
 					placeholder="Description"
 					label="Description"
@@ -68,27 +84,8 @@
 				/>
 			</div>
 			<div class="button-container">
-				<Button {loading} kind={ButtonKind.Featured} onClick={handleSubmit}>Submit</Button>
+				<Button {loading} kind={ButtonKind.Featured}>Submit</Button>
 			</div>
-			{#if message}
-				<div class="alert {isError ? 'alert-error' : 'alert-success'} shadow-lg message">
-					<div>
-						<svg
-							xmlns="http://www.w3.org/2000/svg"
-							class="stroke-current flex-shrink-0 h-6 w-6"
-							fill="none"
-							viewBox="0 0 24 24"
-							><path
-								stroke-linecap="round"
-								stroke-linejoin="round"
-								stroke-width="2"
-								d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-							/></svg
-						>
-						<span>{message}</span>
-					</div>
-				</div>
-			{/if}
 		</form>
 	</div>
 	<div class="alert-container">
