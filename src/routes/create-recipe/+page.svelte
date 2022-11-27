@@ -5,20 +5,62 @@
 	import Alert from 'components/alert/alert.svelte';
 	import { ButtonKind } from 'components/button/types';
 	import { api_routes } from 'src/routes';
+	import IngredientSelector from 'components/ingredient-selector/ingredient-selector.svelte';
+	import type { IngredientInputRowState } from 'components/ingredient-selector/types';
 
 	let name: string;
 	let description: string;
 	let time: number;
+	let ingredients: IngredientInputRowState[] = [
+		{ name: '', number: '', unit: '', isUnitSelected: false }
+	];
 
 	let loading: boolean = false;
 	let message: string = '';
 	let isError: boolean = false;
+
+	$: console.log(...ingredients);
 
 	const handleSubmit = (e: any) => {
 		e.preventDefault();
 		isError = false;
 		message = '';
 		loading = true;
+		let isErrorFound = false;
+
+		if (!name) {
+			message = 'Please add a name for your recipe!';
+			isErrorFound = true;
+		}
+
+		if (!description) {
+			message = 'Please add description for your recipe!';
+			isErrorFound = true;
+		}
+
+		if (!time) {
+			message = 'Please add recipe time!';
+			isErrorFound = true;
+		}
+
+		ingredients.forEach((ingredient: IngredientInputRowState) => {
+			if (
+				!ingredient.name ||
+				!ingredient.number ||
+				!ingredient.unit ||
+				!ingredient.isUnitSelected
+			) {
+				message = 'Missing information in ingredients';
+				isErrorFound = true;
+			}
+		});
+
+		if (isErrorFound) {
+			isError = true;
+			loading = false;
+			return;
+		}
+
 		fetch(api_routes.create_recipe, {
 			method: 'POST',
 			headers: {
@@ -28,7 +70,7 @@
 				name,
 				time,
 				description,
-				ingredients: { banan: '10dkg' }
+				ingredients
 			})
 		})
 			.then((response) => response.json())
@@ -62,7 +104,7 @@
 				/>
 			</div>
 			<div class="container recipe-input-container">
-				<Input domId="recipe-ingredints" placeholder="Recipe ingredients" label="Ingredients" />
+				<IngredientSelector bind:value={ingredients} />
 			</div>
 			<div class="container time-input-container">
 				<Input

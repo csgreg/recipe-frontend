@@ -55,9 +55,7 @@
 		// return str.replace(/<(strong)>/g, "").replace(/<\/(strong)>/g, "");
 	};
 
-	/* NAVIGATING OVER THE LIST OF COUNTRIES W HIGHLIGHTING */
 	let hiLiteIndex: any = null;
-	//$: console.log(hiLiteIndex);
 	$: hiLitedCountry = filteredOptions[hiLiteIndex];
 
 	const navigateList = (e: any) => {
@@ -94,6 +92,7 @@
 		bind:value={inputValue}
 		on:input={filterOptions}
 		on:blur={hideSuggestions}
+		autocomplete="off"
 	/>
 </div>
 
