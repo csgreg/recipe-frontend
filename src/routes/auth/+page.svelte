@@ -1,7 +1,48 @@
-<script>
+<script lang="ts">
 	import Button from 'components/button/button.svelte';
 	import Card from 'components/card/card.svelte';
 	import Input from 'components/input/input.svelte';
+	import { api_routes } from 'src/routes';
+
+	let signUpEmail: string = '';
+	let signUpPassword: string = '';
+	let signUpConfirmPassword: string = '';
+
+	const handleSignIn = () => {
+		fetch(api_routes.signin, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({
+				email: signUpEmail,
+				password: signUpPassword,
+				confirmPassword: signUpConfirmPassword
+			})
+		})
+			.then((response) => response.json())
+			.then((data) => {
+				console.log(data);
+			});
+	};
+
+	const handleSignUp = () => {
+		fetch(api_routes.signup, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({
+				email: signUpEmail,
+				password: signUpPassword,
+				confirmPassword: signUpConfirmPassword
+			})
+		})
+			.then((response) => response.json())
+			.then((data) => {
+				console.log(data);
+			});
+	};
 </script>
 
 <div class="auth-page">
@@ -14,16 +55,20 @@
 				<div class="sign-up-container">
 					<h2 class="subtitle">Sign Up</h2>
 					<div class="input-container">
-						<Input placeholder="email" label="Email" />
+						<Input bind:inputValue={signUpEmail} placeholder="email" label="Email" />
 					</div>
 					<div class="input-container">
-						<Input placeholder="password" label="Password" />
+						<Input bind:inputValue={signUpPassword} placeholder="password" label="Password" />
 					</div>
 					<div class="input-container">
-						<Input placeholder="confirm password" label="Confirm Password" />
+						<Input
+							bind:inputValue={signUpConfirmPassword}
+							placeholder="confirm password"
+							label="Confirm Password"
+						/>
 					</div>
 					<div class="cta-btn">
-						<Button onClick={() => {}}>Sign Up</Button>
+						<Button onClick={handleSignUp}>Sign Up</Button>
 					</div>
 				</div>
 			</Card>
@@ -42,7 +87,7 @@
 						<a href="#">Forgot my password</a>
 					</div>
 					<div class="cta-btn">
-						<Button onClick={() => {}}>Login</Button>
+						<Button onClick={handleSignIn}>Login</Button>
 					</div>
 				</div>
 			</Card>
