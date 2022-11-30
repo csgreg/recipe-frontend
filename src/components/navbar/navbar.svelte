@@ -4,7 +4,9 @@
 	import Cancel24 from 'components/icons/Cancel24.svelte';
 	import brandLogo from '$lib/static/logo.svg';
 	import Menu24 from 'components/icons/Menu24.svelte';
+	import Profile24 from 'components/icons/Profile24.svelte';
 
+	let isLoggedIn = true;
 	let isDown = true;
 	const handleDown = () => {
 		isDown = !isDown;
@@ -16,15 +18,23 @@
 		<li class="navbar-brand">
 			<img class="navbar-brand-logo" src={brandLogo} alt="project logo" />
 		</li>
-		<li class="sign-up-btn">
-			<Button
-				size={ButtonSize.Field}
-				onClick={() => {
-					window.location.href = '/auth';
-				}}
-				kind={ButtonKind.Text}>Sign up</Button
-			>
-		</li>
+		{#if isLoggedIn}
+			<li class="profile-btn">
+				<div class="profile-icon">
+					<a href="/profile"><Profile24 /> <span class="link-text">Profile</span></a>
+				</div>
+			</li>
+		{:else}
+			<li class="sign-up-btn">
+				<Button
+					size={ButtonSize.Field}
+					onClick={() => {
+						window.location.href = '/auth';
+					}}
+					kind={ButtonKind.Text}>Sign up</Button
+				>
+			</li>
+		{/if}
 		<li class="drop-down-btn" on:mousedown={handleDown}>
 			{#if isDown} <Menu24 /> {:else} <Cancel24 /> {/if}
 		</li>
@@ -105,6 +115,34 @@
 				top: 8px;
 				right: 40px;
 			}
+
+			.profile-btn {
+				position: absolute;
+				top: 14px;
+				right: 40px;
+
+				.profile-icon {
+					padding: $spacing-03;
+					border-radius: 8px;
+
+					a {
+						display: flex;
+						flex-direction: row;
+						padding: $spacing-03;
+
+						.link-text {
+							margin-left: $spacing-02;
+						}
+					}
+
+					a:hover {
+						padding: $spacing-03;
+						border-radius: 8px;
+						background-color: $color-02;
+						color: $bg-primary;
+					}
+				}
+			}
 			.drop-down-btn {
 				position: absolute;
 				left: 12px;
@@ -149,6 +187,15 @@
 				}
 
 				.sign-up-btn {
+					position: unset;
+					display: flex;
+					justify-content: flex-end;
+					width: 100%;
+					height: 100%;
+					order: 3;
+				}
+
+				.profile-btn {
 					position: unset;
 					display: flex;
 					justify-content: flex-end;
