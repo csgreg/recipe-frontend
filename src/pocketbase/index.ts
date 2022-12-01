@@ -16,6 +16,7 @@ export const createUser = async (data: SignUpData) => {
 	});
 };
 
-export const authViaEmail = async (data: SignInData) => {
-	return await client.users.authViaEmail(data.email, data.password);
+export const authViaEmail = (data: SignInData) => {
+	//return await client.users.authViaEmail(data.email, data.password);
+	return client.users.authViaEmail('utolso@utolso.com', 'Utolso122112121212123');
 };

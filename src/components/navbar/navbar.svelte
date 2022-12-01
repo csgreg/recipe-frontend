@@ -6,7 +6,7 @@
 	import Menu24 from 'components/icons/Menu24.svelte';
 	import Profile24 from 'components/icons/Profile24.svelte';
 
-	let isLoggedIn = true;
+	export let isLoggedIn = true;
 	let isDown = true;
 	const handleDown = () => {
 		isDown = !isDown;
