@@ -113,13 +113,13 @@
 			.sign-up-btn {
 				position: absolute;
 				top: 8px;
-				right: 40px;
+				right: 15px;
 			}
 
 			.profile-btn {
 				position: absolute;
-				top: 14px;
-				right: 40px;
+				top: 4px;
+				right: 10px;
 
 				.profile-icon {
 					padding: $spacing-03;

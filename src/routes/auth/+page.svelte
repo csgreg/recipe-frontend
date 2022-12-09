@@ -8,6 +8,9 @@
 	let signUpPassword: string = '';
 	let signUpConfirmPassword: string = '';
 
+	let signInEmail: string = '';
+	let signInPassword: string = '';
+
 	const handleSignIn = () => {
 		fetch(api_routes.signin, {
 			method: 'POST',
@@ -15,9 +18,8 @@
 				'Content-Type': 'application/json'
 			},
 			body: JSON.stringify({
-				email: signUpEmail,
-				password: signUpPassword,
-				confirmPassword: signUpConfirmPassword
+				email: signInEmail,
+				password: signInPassword
 			})
 		})
 			.then((response) => response.json())
@@ -60,13 +62,19 @@
 						<Input bind:inputValue={signUpEmail} placeholder="email" label="Email" />
 					</div>
 					<div class="input-container">
-						<Input bind:inputValue={signUpPassword} placeholder="password" label="Password" />
+						<Input
+							bind:inputValue={signUpPassword}
+							placeholder="password"
+							label="Password"
+							type="password"
+						/>
 					</div>
 					<div class="input-container">
 						<Input
 							bind:inputValue={signUpConfirmPassword}
 							placeholder="confirm password"
 							label="Confirm Password"
+							type="password"
 						/>
 					</div>
 					<div class="cta-btn">
@@ -80,10 +88,15 @@
 				<div class="login-container">
 					<h2 class="subtitle">Login</h2>
 					<div class="input-container">
-						<Input placeholder="email" label="Email" />
+						<Input bind:inputValue={signInEmail} placeholder="email" label="Email" />
 					</div>
 					<div class="input-container">
-						<Input placeholder="password" label="Password" />
+						<Input
+							bind:inputValue={signInPassword}
+							placeholder="password"
+							label="Password"
+							type="password"
+						/>
 					</div>
 					<div class="forgot-password">
 						<a href="#">Forgot my password</a>

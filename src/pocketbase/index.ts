@@ -16,7 +16,20 @@ export const createUser = async (data: SignUpData) => {
 	});
 };
 
-export const authViaEmail = (data: SignInData) => {
-	//return await client.users.authViaEmail(data.email, data.password);
-	return client.users.authViaEmail('utolso@utolso.com', 'Utolso122112121212123');
+export const authViaEmail = async (data: SignInData, event: any) => {
+	const userData = await client.users.authViaEmail(data.email, data.password);
+	const cookieData = client.authStore.exportToCookie();
+	event.cookies.set('access-token', cookieData, {
+		path: '/',
+		maxAge: 60 * 60 * 24 * 30,
+		httpOnly: true
+	});
+	return userData;
+};
+
+export const getAuthStore = (cookieString: string) => {
+	client.authStore.loadFromCookie(cookieString);
+	const authData = client.authStore.baseModel;
+	const { id, email, verified } = authData;
+	return { id, email, verified };
 };

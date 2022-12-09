@@ -3,7 +3,6 @@
 	import Navbar from 'components/navbar/navbar.svelte';
 	import Footer from 'components/footer/footer.svelte';
 	export let data: { isLoggedIn: boolean };
-	console.log(data.isLoggedIn);
 </script>
 
 <Navbar isLoggedIn={data.isLoggedIn} />
