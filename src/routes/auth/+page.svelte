@@ -1,4 +1,5 @@
 <script lang="ts">
+	import Alert from 'components/alert/alert.svelte';
 	import Button from 'components/button/button.svelte';
 	import Card from 'components/card/card.svelte';
 	import Input from 'components/input/input.svelte';
@@ -10,6 +11,11 @@
 
 	let signInEmail: string = '';
 	let signInPassword: string = '';
+
+	let isSignupError: boolean = false;
+	let isSigninError: boolean = false;
+
+	let isSignupSuccess: boolean = false;
 
 	const handleSignIn = () => {
 		fetch(api_routes.signin, {
@@ -26,6 +32,8 @@
 			.then((data) => {
 				if (data.success) {
 					window?.location.reload();
+				} else {
+					isSigninError = true;
 				}
 			});
 	};
@@ -45,6 +53,11 @@
 			.then((response) => response.json())
 			.then((data) => {
 				console.log(data);
+				if (data.success) {
+					isSignupSuccess = true;
+				} else {
+					isSignupError = true;
+				}
 			});
 	};
 </script>
@@ -77,6 +90,14 @@
 							type="password"
 						/>
 					</div>
+					{#if isSignupError || isSignupSuccess}
+						<div class="sign-up-alert">
+							<Alert
+								isError={!isSignupSuccess}
+								message={isSignupSuccess ? 'Sign up succeeded!' : 'Sign up failed!'}
+							/>
+						</div>
+					{/if}
 					<div class="cta-btn">
 						<Button onClick={handleSignUp}>Sign Up</Button>
 					</div>
@@ -101,6 +122,11 @@
 					<div class="forgot-password">
 						<a href="#">Forgot my password</a>
 					</div>
+					{#if isSigninError}
+						<div class="sign-in-alert">
+							<Alert isError message="Sign in failed!" />
+						</div>
+					{/if}
 					<div class="cta-btn">
 						<Button onClick={handleSignIn}>Login</Button>
 					</div>
@@ -148,6 +174,14 @@
 				margin-bottom: $spacing-02;
 			}
 
+			.sign-up-alert {
+				margin-top: $spacing-04;
+			}
+
+			.sign-in-alert {
+				margin-top: $spacing-04;
+			}
+
 			.cta-btn {
 				display: flex;
 				height: 100%;
@@ -156,7 +190,7 @@
 			}
 
 			.login-container {
-				height: 350px;
+				height: 420px;
 				text-align: center;
 				display: flex;
 				flex-direction: column;
@@ -173,7 +207,7 @@
 			}
 
 			.sign-up-container {
-				height: 350px;
+				height: 420px;
 				text-align: center;
 				display: flex;
 				flex-direction: column;
