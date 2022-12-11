@@ -1,8 +1,35 @@
 import PocketBase from 'pocketbase';
+import type { SignInData, SignUpData } from 'src/@types/requestData';
 import type Recipe from 'src/entities/recipe';
 
-const client = new PocketBase('https://recipe-service.fly.dev');
+const client: any = new PocketBase('https://recipe-service.fly.dev');
 
 export const createRecipe = async (data: Recipe) => {
 	return await client.records.create('recipes', data);
+};
+
+export const createUser = async (data: SignUpData) => {
+	return await client.Users.create({
+		email: data.email,
+		password: data.password,
+		passwordConfirm: data.confirmPassword
+	});
+};
+
+export const authViaEmail = async (data: SignInData, event: any) => {
+	const userData = await client.users.authViaEmail(data.email, data.password);
+	const cookieData = client.authStore.exportToCookie();
+	event.cookies.set('access-token', cookieData, {
+		path: '/',
+		maxAge: 60 * 60 * 24 * 30,
+		httpOnly: true
+	});
+	return userData;
+};
+
+export const getAuthStore = (cookieString: string) => {
+	client.authStore.loadFromCookie(cookieString);
+	const authData = client.authStore.baseModel;
+	const { id, email, verified } = authData;
+	return { id, email, verified };
 };
