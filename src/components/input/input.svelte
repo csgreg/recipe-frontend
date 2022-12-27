@@ -23,6 +23,7 @@
 		on:input={handleInput}
 		value={inputValue}
 		id={domId}
+		name={domId}
 		{type}
 		{placeholder}
 		class={`input input-bordered ${className}`}

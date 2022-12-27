@@ -7,6 +7,7 @@
 	export let size: ButtonSize = ButtonSize.Field;
 	export let loading: boolean = false;
 	export let withIcon: boolean = false;
+	export let type: 'button' | 'submit' | 'reset' | null | undefined = undefined;
 </script>
 
 <button
@@ -22,6 +23,7 @@
 		{ 'btn-lg': size === ButtonSize.Large },
 		{ loading: loading }
 	)}
+	{type}
 	on:click={onClick}><slot /></button
 >
 

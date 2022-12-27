@@ -15,9 +15,14 @@
 	let isSignupError: boolean = false;
 	let isSigninError: boolean = false;
 
+	let isSignupLoading: boolean = false;
+	let isSigninLoading: boolean = false;
+
 	let isSignupSuccess: boolean = false;
 
-	const handleSignIn = () => {
+	const handleSignIn = (e: Event) => {
+		isSigninLoading = true;
+		e.preventDefault();
 		fetch(api_routes.signin, {
 			method: 'POST',
 			headers: {
@@ -35,10 +40,18 @@
 				} else {
 					isSigninError = true;
 				}
+			})
+			.catch((e: Error) => {
+				console.warn(e);
+			})
+			.finally(() => {
+				isSigninLoading = false;
 			});
 	};
 
-	const handleSignUp = () => {
+	const handleSignUp = (e: Event) => {
+		isSignupLoading = true;
+		e.preventDefault();
 		fetch(api_routes.signup, {
 			method: 'POST',
 			headers: {
@@ -52,12 +65,17 @@
 		})
 			.then((response) => response.json())
 			.then((data) => {
-				console.log(data);
 				if (data.success) {
 					isSignupSuccess = true;
 				} else {
 					isSignupError = true;
 				}
+			})
+			.catch((e: Error) => {
+				console.warn(e);
+			})
+			.finally(() => {
+				isSignupLoading = false;
 			});
 	};
 </script>
@@ -69,13 +87,14 @@
 	<div class="auth-section">
 		<div class="left">
 			<Card>
-				<div class="sign-up-container">
+				<form on:submit={handleSignUp} class="sign-up-container">
 					<h2 class="subtitle">Sign Up</h2>
 					<div class="input-container">
-						<Input bind:inputValue={signUpEmail} placeholder="email" label="Email" />
+						<Input domId="email" bind:inputValue={signUpEmail} placeholder="email" label="Email" />
 					</div>
 					<div class="input-container">
 						<Input
+							domId="password"
 							bind:inputValue={signUpPassword}
 							placeholder="password"
 							label="Password"
@@ -84,6 +103,7 @@
 					</div>
 					<div class="input-container">
 						<Input
+							domId="confirm-password"
 							bind:inputValue={signUpConfirmPassword}
 							placeholder="confirm password"
 							label="Confirm Password"
@@ -99,14 +119,14 @@
 						</div>
 					{/if}
 					<div class="cta-btn">
-						<Button onClick={handleSignUp}>Sign Up</Button>
+						<Button loading={isSignupLoading} type="submit">Sign Up</Button>
 					</div>
-				</div>
+				</form>
 			</Card>
 		</div>
 		<div class="right">
 			<Card>
-				<div class="login-container">
+				<form on:submit={handleSignIn} class="login-container">
 					<h2 class="subtitle">Login</h2>
 					<div class="input-container">
 						<Input bind:inputValue={signInEmail} placeholder="email" label="Email" />
@@ -128,9 +148,9 @@
 						</div>
 					{/if}
 					<div class="cta-btn">
-						<Button onClick={handleSignIn}>Login</Button>
+						<Button loading={isSigninLoading} type="submit">Login</Button>
 					</div>
-				</div>
+				</form>
 			</Card>
 		</div>
 	</div>
