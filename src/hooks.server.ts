@@ -9,7 +9,8 @@ userStore.subscribe((value) => {
 
 export async function handle({ event, resolve }: any) {
 	const token = event.cookies.get('access-token');
-	if (token && user) {
+	if (token) {
+		/* && user) { */
 		const authData = getAuthStore(token);
 		event.locals.userData = authData;
 		userStore.set(authData);

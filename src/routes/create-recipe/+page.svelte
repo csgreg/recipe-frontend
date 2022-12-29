@@ -8,6 +8,8 @@
 	import IngredientSelector from 'components/ingredient-selector/ingredient-selector.svelte';
 	import type { IngredientInputRowState } from 'components/ingredient-selector/types';
 
+	export let data: { userData: any };
+	let user_id: string = data.userData.id;
 	let name: string;
 	let description: string;
 	let time: number;
@@ -19,7 +21,7 @@
 	let message: string = '';
 	let isError: boolean = false;
 
-	$: console.log(...ingredients);
+	$: console.log(data.userData);
 
 	const handleSubmit = (e: any) => {
 		e.preventDefault();
@@ -67,10 +69,12 @@
 				'Content-Type': 'application/json'
 			},
 			body: JSON.stringify({
-				name,
+				user_id,
 				time,
+				name,
 				description,
-				ingredients
+				ingredients,
+				difficulty: 3
 			})
 		})
 			.then((response) => response.json())

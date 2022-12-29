@@ -8,6 +8,12 @@ export const createRecipe = async (data: Recipe) => {
 	return await client.records.create('recipes', data);
 };
 
+export const getUserRecipes = (user_id: string) => {
+	return client.records.getList('recipes', 1, 5, {
+		//filter: `user_id == "${user_id}"`
+	});
+};
+
 export const createUser = async (data: SignUpData) => {
 	return await client.Users.create({
 		email: data.email,
