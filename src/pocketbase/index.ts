@@ -4,13 +4,13 @@ import type Recipe from 'src/entities/recipe';
 
 const client: any = new PocketBase('https://recipe-service.fly.dev');
 
-export const createRecipe = async (data: Recipe) => {
-	return await client.records.create('recipes', data);
+export const createRecipe = (data: Recipe) => {
+	return client.records.create('recipes', data);
 };
 
-export const getUserRecipes = (user_id: string) => {
-	return client.records.getList('recipes', 1, 5, {
-		//filter: `user_id == "${user_id}"`
+export const getUserRecipes = async (user_id: string) => {
+	return await client.records.getList('recipes', 1, 5, {
+		filter: `user_id = "${user_id}"`
 	});
 };
 

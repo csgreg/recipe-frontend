@@ -1,7 +1,8 @@
 export default interface Recipe {
 	id?: string;
 	name: string;
-	ingredients: { [key in string]: string };
+	ingredients: { isUnitSelected: boolean; name: string; number: number; unit: string }[];
 	time: number;
+	difficulty: number;
 	description: string;
 }

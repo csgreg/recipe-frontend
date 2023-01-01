@@ -1,40 +1,33 @@
 <script lang="ts">
 	import Star24 from 'components/icons/Star24.svelte';
 	import Tag from 'components/tag/tag.svelte';
+	import type Recipe from 'entities/recipe';
+
+	export let data: Recipe;
 </script>
 
 <div class="recipe-card">
-	<span class="recipe-card-name">Fasirt krumplival</span>
-	<span class="recipe-card-time">Time: 36 mins</span>
+	<span class="recipe-card-name">{data.name}</span>
+	<span class="recipe-card-time">Time: {data.time} mins</span>
 	<div class="recipe-card-difficulty">
-		<div class="recipe-card-difficulty-highlighted">
-			<Star24 />
-		</div>
-		<div class="recipe-card-difficulty-highlighted">
-			<Star24 />
-		</div>
-		<div class="recipe-card-difficulty-highlighted">
-			<Star24 />
-		</div>
-		<div class="recipe-card-difficulty-faded">
-			<Star24 />
-		</div>
-		<div class="recipe-card-difficulty-faded">
-			<Star24 />
-		</div>
+		{#each Array(data.difficulty) as _, i}
+			<div class="recipe-card-difficulty-highlighted">
+				<Star24 />
+			</div>
+		{/each}
+		{#each Array(5-data.difficulty) as _, i}
+			<div class="recipe-card-difficulty-faded">
+				<Star24 />
+			</div>
+		{/each}
 	</div>
 	<div class="recipe-card-ingredients">
-		<Tag text="24dkg marhahus" />
-		<Tag text="24dkg marhahus" />
-		<Tag text="24dkg marhahus" />
-		<Tag text="24dkg marhahus" />
-		<Tag text="24dkg marhahus" />
-		<Tag text="24dkg marhahus" />
+		{#each data.ingredients as ingredient}
+			<Tag text="{ingredient.number}{ingredient.unit} {ingredient.name}" />
+		{/each}
 	</div>
 	<div class="recipe-card-description">
-		Lorem ipsum dolor sit, amet consectetur adipisicing elit. Maiores tenetur mollitia illum odio
-		numquam et temporibus, molestiae id at nisi ducimus nihil quasi labore iusto blanditiis,
-		molestias quas! Porro, magni.
+		{data.description}
 	</div>
 </div>
 
