@@ -3,8 +3,6 @@
 	import type Recipe from 'entities/recipe';
 
 	export let data: { myRecipes: Recipe[] };
-
-	console.log(data.myRecipes);
 </script>
 
 {#each data.myRecipes as recipe}

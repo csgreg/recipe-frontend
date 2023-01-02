@@ -7,11 +7,13 @@
 	import { api_routes } from 'src/routes';
 	import IngredientSelector from 'components/ingredient-selector/ingredient-selector.svelte';
 	import type { IngredientInputRowState } from 'components/ingredient-selector/types';
+	import FileInput from 'components/file-input/fileInput.svelte';
 
 	export let data: { userData: any };
 	let user_id: string = data.userData.id;
 	let name: string;
 	let description: string;
+	let files: any;
 	let time: number;
 	let ingredients: IngredientInputRowState[] = [
 		{ name: '', number: '', unit: '', isUnitSelected: false }
@@ -21,7 +23,7 @@
 	let message: string = '';
 	let isError: boolean = false;
 
-	$: console.log(data.userData);
+	$: console.log(files);
 
 	const handleSubmit = (e: any) => {
 		e.preventDefault();
@@ -74,7 +76,8 @@
 				name,
 				description,
 				ingredients,
-				difficulty: 3
+				difficulty: 3,
+				image: files
 			})
 		})
 			.then((response) => response.json())
@@ -119,6 +122,9 @@
 					bind:inputValue={time}
 				/>
 				<span>minutes</span>
+			</div>
+			<div class="container file-input-container">
+				<FileInput bind:fileData={files} />
 			</div>
 			<div class="container description-input-container">
 				<Textarea
@@ -195,6 +201,10 @@
 					margin-top: $spacing-06;
 					margin-left: $spacing-04;
 				}
+			}
+
+			.file-input-container {
+				margin-top: $spacing-05;
 			}
 		}
 

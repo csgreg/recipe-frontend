@@ -9,7 +9,7 @@ export const createRecipe = (data: Recipe) => {
 };
 
 export const getUserRecipes = async (user_id: string) => {
-	return await client.records.getList('recipes', 1, 5, {
+	return await client.records.getList('recipes', 1, 10, {
 		filter: `user_id = "${user_id}"`
 	});
 };
