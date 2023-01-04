@@ -7,19 +7,25 @@
 	import { api_routes } from 'src/routes';
 	import IngredientSelector from 'components/ingredient-selector/ingredient-selector.svelte';
 	import type { IngredientInputRowState } from 'components/ingredient-selector/types';
+	import Select from 'components/select/select.svelte';
 
+	export let data: { userData: any };
+	let user_id: string = data.userData.id;
 	let name: string;
 	let description: string;
+	let files: any;
 	let time: number;
 	let ingredients: IngredientInputRowState[] = [
 		{ name: '', number: '', unit: '', isUnitSelected: false }
 	];
+	let categories = ['appetizer', 'soup', 'main dish', 'dessert'];
+	let category: string;
 
 	let loading: boolean = false;
 	let message: string = '';
 	let isError: boolean = false;
 
-	$: console.log(...ingredients);
+	$: console.log(category);
 
 	const handleSubmit = (e: any) => {
 		e.preventDefault();
@@ -67,10 +73,14 @@
 				'Content-Type': 'application/json'
 			},
 			body: JSON.stringify({
-				name,
+				user_id,
 				time,
+				name,
 				description,
-				ingredients
+				ingredients,
+				rating: 3,
+				image: files,
+				category
 			})
 		})
 			.then((response) => response.json())
@@ -103,7 +113,16 @@
 					bind:inputValue={name}
 				/>
 			</div>
-			<div class="container recipe-input-container">
+			<div class="container name-input-container">
+				<Select
+					label="Category"
+					domId="category-select"
+					placeholder="Select category"
+					options={categories}
+					bind:value={category}
+				/>
+			</div>
+			<div class="container ingredients-input-container">
 				<IngredientSelector bind:value={ingredients} />
 			</div>
 			<div class="container time-input-container">
@@ -169,17 +188,15 @@
 			flex-direction: column;
 			align-items: center;
 
-			.container {
-				margin-top: $spacing-03;
-			}
 			.button-container {
 				width: 100%;
 				display: flex;
 				justify-content: center;
 				margin-top: $spacing-03;
 			}
-			.message {
-				margin-top: $spacing-04;
+
+			.ingredients-input-container {
+				margin-top: $spacing-03;
 			}
 
 			.time-input-container {
@@ -191,6 +208,10 @@
 					margin-top: $spacing-06;
 					margin-left: $spacing-04;
 				}
+			}
+
+			.file-input-container {
+				margin-top: $spacing-05;
 			}
 		}
 

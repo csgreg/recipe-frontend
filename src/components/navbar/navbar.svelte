@@ -41,9 +41,14 @@
 		<li class="navbar-item" class:is-hidden={isDown} itemprop="name">
 			<a data-sveltekit-reload itemprop="url" href="/">Home</a>
 		</li>
-		<li class="navbar-item" class:is-hidden={isDown} itemprop="name">
-			<a data-sveltekit-reload itemprop="url" href="/create-recipe">Create</a>
-		</li>
+		{#if isLoggedIn}
+			<li class="navbar-item" class:is-hidden={isDown} itemprop="name">
+				<a data-sveltekit-reload itemprop="url" href="/create-recipe">Create</a>
+			</li>
+			<li class="navbar-item" class:is-hidden={isDown} itemprop="name">
+				<a data-sveltekit-reload itemprop="url" href="/my-recipes">My Recipes</a>
+			</li>
+		{/if}
 		<li class="navbar-item" class:is-hidden={isDown} itemprop="name">
 			<a data-sveltekit-reload itemprop="url" href="http://www.travelstore.com/destinations"
 				>About</a
@@ -167,6 +172,7 @@
 					margin-right: $spacing-07;
 					padding: $spacing-03;
 					font-weight: 500;
+					min-width: fit-content;
 				}
 
 				&-item:last-of-type {

@@ -48,8 +48,8 @@
 	@import '../../style/variables.scss';
 
 	.label-text {
+		margin-left: $spacing-02;
 		color: $text-primary;
-		padding-bottom: $spacing-01;
 	}
 
 	.ingredint-selector {

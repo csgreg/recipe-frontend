@@ -1,7 +1,7 @@
 <script lang="ts">
 	export let label: string | undefined = undefined;
 	export let domId: string | undefined = undefined;
-	export let placeholder: string;
+	export let placeholder: string | undefined = undefined;
 	export let type: string = 'text';
 	export let className: string = '';
 	export let inputValue: string | number = '';
@@ -23,6 +23,7 @@
 		on:input={handleInput}
 		value={inputValue}
 		id={domId}
+		name={domId}
 		{type}
 		{placeholder}
 		class={`input input-bordered ${className}`}
@@ -44,6 +45,11 @@
 		color: $text-primary;
 		min-width: 100%;
 		background-color: $bg-secondary;
+	}
+
+	.input [type='file'] {
+		background-color: none;
+		border: none;
 	}
 
 	.input::placeholder {
