@@ -5,7 +5,7 @@
 	const logout = () => {
 		fetch(api_routes.logout)
 			.then((response) => response.json())
-			.then((data) => location.reload());
+			.then(() => location.reload());
 	};
 </script>
 

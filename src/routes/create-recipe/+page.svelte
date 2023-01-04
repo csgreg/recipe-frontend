@@ -7,7 +7,7 @@
 	import { api_routes } from 'src/routes';
 	import IngredientSelector from 'components/ingredient-selector/ingredient-selector.svelte';
 	import type { IngredientInputRowState } from 'components/ingredient-selector/types';
-	import FileInput from 'components/file-input/fileInput.svelte';
+	import Select from 'components/select/select.svelte';
 
 	export let data: { userData: any };
 	let user_id: string = data.userData.id;
@@ -18,12 +18,14 @@
 	let ingredients: IngredientInputRowState[] = [
 		{ name: '', number: '', unit: '', isUnitSelected: false }
 	];
+	let categories = ['appetizer', 'soup', 'main dish', 'dessert'];
+	let category: string;
 
 	let loading: boolean = false;
 	let message: string = '';
 	let isError: boolean = false;
 
-	$: console.log(files);
+	$: console.log(category);
 
 	const handleSubmit = (e: any) => {
 		e.preventDefault();
@@ -76,8 +78,9 @@
 				name,
 				description,
 				ingredients,
-				difficulty: 3,
-				image: files
+				rating: 3,
+				image: files,
+				category
 			})
 		})
 			.then((response) => response.json())
@@ -110,7 +113,16 @@
 					bind:inputValue={name}
 				/>
 			</div>
-			<div class="container recipe-input-container">
+			<div class="container name-input-container">
+				<Select
+					label="Category"
+					domId="category-select"
+					placeholder="Select category"
+					options={categories}
+					bind:value={category}
+				/>
+			</div>
+			<div class="container ingredients-input-container">
 				<IngredientSelector bind:value={ingredients} />
 			</div>
 			<div class="container time-input-container">
@@ -122,9 +134,6 @@
 					bind:inputValue={time}
 				/>
 				<span>minutes</span>
-			</div>
-			<div class="container file-input-container">
-				<FileInput bind:fileData={files} />
 			</div>
 			<div class="container description-input-container">
 				<Textarea
@@ -179,17 +188,15 @@
 			flex-direction: column;
 			align-items: center;
 
-			.container {
-				margin-top: $spacing-03;
-			}
 			.button-container {
 				width: 100%;
 				display: flex;
 				justify-content: center;
 				margin-top: $spacing-03;
 			}
-			.message {
-				margin-top: $spacing-04;
+
+			.ingredients-input-container {
+				margin-top: $spacing-03;
 			}
 
 			.time-input-container {

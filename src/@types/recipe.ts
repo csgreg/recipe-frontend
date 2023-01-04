@@ -6,7 +6,9 @@ export interface Recipe {
 	ingredients: Ingredient[];
 	name: string;
 	time: number;
-	difficulty?: number;
+	rating?: number;
+	category?: string;
+	image?: string;
 	user_id?: string;
 }
 

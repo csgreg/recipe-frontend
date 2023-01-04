@@ -22,7 +22,7 @@
 	};
 </script>
 
-<input on:change={handleFileUpload} type="file" class="file-input w-full max-w-xs" />
+<input type="file" class="file-input w-full max-w-xs" />
 
 <style lang="scss">
 	@import '../../style/variables.scss';

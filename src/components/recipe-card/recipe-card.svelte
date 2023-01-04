@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Star24 from 'components/icons/Star24.svelte';
 	import Tag from 'components/tag/tag.svelte';
-	import type Recipe from 'entities/recipe';
+	import type { Recipe } from 'src/@types/recipe';
 
 	export let data: Recipe;
 </script>
@@ -9,18 +9,21 @@
 <div class="recipe-card">
 	<span class="recipe-card-name">{data.name}</span>
 	<span class="recipe-card-time">Time: {data.time} mins</span>
-	<div class="recipe-card-difficulty">
-		{#each Array(data.difficulty) as _, i}
-			<div class="recipe-card-difficulty-highlighted">
-				<Star24 />
-			</div>
-		{/each}
-		{#each Array(5-data.difficulty) as _, i}
-			<div class="recipe-card-difficulty-faded">
-				<Star24 />
-			</div>
-		{/each}
-	</div>
+	{#if data.rating}
+		<div class="recipe-card-difficulty">
+			{#each Array(data.rating) as _, i}
+				<div class="recipe-card-difficulty-highlighted">
+					<Star24 />
+				</div>
+			{/each}
+			{#each Array(5 - data.rating) as _, i}
+				<div class="recipe-card-difficulty-faded">
+					<Star24 />
+				</div>
+			{/each}
+		</div>
+	{/if}
+
 	<div class="recipe-card-ingredients">
 		{#each data.ingredients as ingredient}
 			<Tag text="{ingredient.number}{ingredient.unit} {ingredient.name}" />
